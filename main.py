@@ -1,5 +1,9 @@
 from flask import Flask, request, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
+import jinja2
+
+template_dir = os.path.join(os.path.dirname(__file__), "templates")
+jinja = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), autoescape = True)
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://build-a-blog:root@localhost:8889/build-a-blog'
@@ -28,9 +32,13 @@ def newpost():
 
     if request.method == 'POST':
         blog_title = request.form['title']
-        #validate blog_title server side validation
+        if not form.validate():
+            blog_title_error = "Please include a blog title"
+            return render_template('newpost.html', form=form, blog_title_error=blog_title_error)
         blog_body = request.form['body']
-        #validate blog_body server side validation
+        if not blog_body.validate():
+            body_error = "Please include a post body"
+            return render_template('newpost.html', form=form, body_error=body_error)
         new_blog = Blog(blog_title, blog_body)
         db.session.add(new_blog)
         db.session.commit()
@@ -42,6 +50,7 @@ def newpost():
 def blog():
 
     blog_id = int(request.args.get('id'))
+    blog = blogs.query.get(id=blog_id)
 
     return render_template('blog.html', blog=blog_id)
 
