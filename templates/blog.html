@@ -9,7 +9,6 @@
         {% if blogs|length == 0 %}
             <p>No post yet</p>
         {% else %}
-
             <ul>
                 {% for blog in blogs %}
                     <li><a href="{{ url_for('blog', id=blog.id) }}">{{ blog.title }}</a>

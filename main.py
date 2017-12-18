@@ -58,7 +58,6 @@ def newpost():
 
 @app.route('/blog', methods=['GET'])
 def blog():
-
     blog_id = int(request.args.get('id'))
     blog = Blog.query.filter_by(id=blog_id).first()
 
