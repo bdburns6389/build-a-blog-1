@@ -1,4 +1,4 @@
-{% extends "base.html %"}
+{% extends "base.html" %}
 
 {% block content %}
 
@@ -12,11 +12,11 @@
 
             <ul>
                 {% for blog in blogs %}
-                    <li><a href="{{ url_for('blog', id=blog.id) }}">{{ blog.name }}</a>
+                    <li><a href="{{ url_for('blog', id=blog.id) }}">{{ blog.title }}</a>
                         <ul>
-                            <li class="blog-post-body">{{ blog.post }}</li>
+                            <li class="blog-post-body">{{ blog.body }}</li>
                               <div><small>By:
-                                <a href="{{ url_for('blog', user=blog.owner.id )}}" class="author">{{ blog.owner.username }}</a>
+                                <a href="{{ url_for('blog', user=blog.blog_id)}}" class="author">{{ blog.blog_id }}</a>
                               </div>
                         </ul>
                     </li>

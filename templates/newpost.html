@@ -1,35 +1,26 @@
-{% extends "base.html %"}
+{% extends "base.html" %}
 
 {% block content %}
 
 <main class="container">
 
     <h1>Add a Post Body</h1>
-    <form method="POST" action="/newpost"></form>
-        <div>
-            {% if form.blog_title_error %}
-                {% for error in form.blog_title_error %}
-                    <p class="error-message">{{ error }}</p>
-                {% endfor %}
-            {% endif %}
-
-            {% if form.body_error %}
-                {% for error in form.body_error %}
-                    <p class="error-message">{{ error }}</p>
-                {% endfor %}
-            {% endif %}
-        </div>
+    <form method="POST" action="/newpost">
         <div class="forms">{{ title }}
-            {{ form.blog_title.label }}
-            {{ form.blog_title }}
+          <td><label for="blog_title">Title</label></td>
+                    <td>
+                        <input name="blog_title" type="text" value=""/>
+                          <p class="error-message">{{ blog_title_error }}</p>
         </div>
 
         <div id="blog_body">{{ body }}
-            {{ form.blog_body.label }}
-            {{ form.blog_body }}
+          <td><label for="username">Username</label></td>
+                    <td>
+                        <input name="blog_body" type="text" value=""/>
+                          <p class="error-message">{{ blog_body_error }}</p>
         </div>
 
-        {{ form.submit(class="btn-primary") }}
+        <input type="submit" value="Submit"/>
     </form>
 </main>
 
