@@ -58,10 +58,13 @@ def newpost():
 
 @app.route('/blog', methods=['GET'])
 def blog():
-    blog_id = int(request.args.get('id'))
-    blog = Blog.query.filter_by(id=blog_id).first()
 
-    return render_template('titlebody.html', blog=blog)
+    if request.args:
+        blog_id = request.args.get('id')
+        blog = Blog.query.filter_by(id=blog_id).first()
+        return render_template('blog.html', blog=blog)
+    else:
+        return render_template('titlebody.html', blog=blog)
 
 if __name__ == '__main__':
     app.run()

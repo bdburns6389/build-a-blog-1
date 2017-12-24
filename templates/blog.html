@@ -11,11 +11,11 @@
         {% else %}
             <ul>
                 {% for blog in blogs %}
-                    <li><a href="{{ url_for('blog', id=blog.id) }}">{{ blog.title }}</a>
+                    <a href="/blog?id={{blog.id}}">{{blog.title}}</a>
                         <ul>
                             <li class="blog-post-body">{{ blog.body }}</li>
                               <div><small>By:
-                                <a href="{{ url_for('blog', user=blog.blog_id)}}" class="author">{{ blog.blog_id }}</a>
+                                <a href="/blog?id={{blog.id}}">{{blog.title}}</a>
                               </div>
                         </ul>
                     </li>
